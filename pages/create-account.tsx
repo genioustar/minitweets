@@ -1,4 +1,4 @@
-export default function Login() {
+export default function CreateAccount() {
   return (
     <div className="w-full mx-auto max-w-xl mt-16">
       <div className="flex justify-center ">
@@ -9,8 +9,9 @@ export default function Login() {
         <input id="email" className="border"></input>
         <label htmlFor="password">비밀번호</label>
         <input id="password" className="border"></input>
-
-        <button>로그인</button>
+        <label htmlFor="confirm">비밀번호 확인</label>
+        <input id="confirm" className="border"></input>
+        <button>회원 가입</button>
       </div>
     </div>
   );
