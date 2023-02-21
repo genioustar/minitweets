@@ -28,5 +28,8 @@
   },
   "license": "ISC",
   "keywords": [],
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "@tailwindcss/forms": "^0.5.3"
+  }
 }
