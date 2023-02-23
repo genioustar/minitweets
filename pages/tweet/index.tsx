@@ -1,4 +1,6 @@
 import useMutation from "@/lib/client/useMutation";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 
 interface MutationResults {
@@ -13,10 +15,15 @@ export default function CreateTweet() {
   const { register, handleSubmit, reset } = useForm<PostTweetForm>();
   const [write, { data }] = useMutation<MutationResults>("/api/posts/");
   const onValid = (validForm: PostTweetForm) => {
-    // reset();
-    // console.log(validForm);
+    reset();
     write(validForm);
   };
+  const router = useRouter();
+  useEffect(() => {
+    if (data?.ok) {
+      router.push("/");
+    }
+  });
   return (
     <div className="w-full mx-auto max-w-xl mt-16">
       <form

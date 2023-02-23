@@ -10,9 +10,16 @@ export default async function GetTweets(
   req: NextApiRequest,
   res: NextApiResponse<ResponseType>
 ) {
-  console.log(req);
   if (req.method === "GET") {
-    const tweets = await client.post.findMany();
+    const tweets = await client.post.findMany({
+      include: {
+        user: {
+          select: {
+            name: true,
+          },
+        },
+      },
+    });
     res.json({
       ok: true,
       tweets,

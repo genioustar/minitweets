@@ -15,8 +15,6 @@ async function handler(
     body: { writting },
     session: { user },
   } = req;
-  console.log(writting);
-  console.log(user);
   const createTweet = await client?.post.create({
     data: {
       writting,
