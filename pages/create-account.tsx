@@ -24,7 +24,7 @@ export default function CreateAccount() {
   const router = useRouter();
   useEffect(() => {
     if (loginData) {
-      router.push("/");
+      router.push("/log-in");
     }
   });
   return (
