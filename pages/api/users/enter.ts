@@ -1,9 +1,11 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import client from "../../../lib/server/client";
 
+/**
+ * 유저가 create-account를 했을때 유저정보를 User table에 create하는 부분
+ */
 interface ResponseType {
   ok: boolean;
-  [key: string]: any;
 }
 
 export default async function Enter(
