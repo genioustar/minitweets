@@ -1,4 +1,7 @@
+import useSWR from "swr";
+
 export default function DetailTweet() {
+  const { data } = useSWR(`/api/tweets`);
   return (
     <div className="w-full mx-auto max-w-xl mt-16">
       <div className="flex justify-start items-center border-b py-4 pl-4">
