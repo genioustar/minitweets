@@ -20,7 +20,6 @@ export default function Login() {
     reset();
     confirm(validForm);
   };
-  console.log(data);
   const router = useRouter();
   useEffect(() => {
     if (data?.ok) {

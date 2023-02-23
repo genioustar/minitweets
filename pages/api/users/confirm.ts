@@ -21,8 +21,6 @@ async function handler(
       email,
     },
   });
-  console.log(loginData);
-  console.log(password);
   if (loginData?.password === password) {
     req.session.user = {
       id: Number(loginData?.id),

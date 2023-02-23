@@ -26,7 +26,7 @@ model Post {
   id         Int         @id @default(autoincrement())
   createdAt  DateTime    @default(now())
   updatedAt  DateTime    @updatedAt
-  writing    String
+  writting   String
   user       User        @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId     Int
   favs       Fav[]
