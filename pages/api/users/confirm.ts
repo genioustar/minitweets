@@ -1,4 +1,3 @@
-import withHandler from "@/lib/server/withHandler";
 import { withApiSession } from "@/lib/server/withSession";
 import { NextApiRequest, NextApiResponse } from "next";
 import client from "../../../lib/server/client";
@@ -11,16 +10,16 @@ interface ResponseType {
   [key: string]: any;
 }
 
-async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<ResponseType>
-) {
-  const { email, password } = req.body;
+async function Login(req: NextApiRequest, res: NextApiResponse<ResponseType>) {
+  const {
+    body: { email, password },
+  } = req;
   const loginData = await client?.user.findFirst({
     where: {
       email,
     },
   });
+  console.log(loginData);
   if (loginData?.password === password) {
     req.session.user = {
       id: Number(loginData?.id),
@@ -34,4 +33,4 @@ async function handler(
   }
 }
 
-export default withApiSession(withHandler({ methods: ["POST"], handler }));
+export default withApiSession(Login);

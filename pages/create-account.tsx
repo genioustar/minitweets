@@ -17,7 +17,7 @@ export default function CreateAccount() {
   const [enter, { data: loginData }] =
     useMutation<MutationResults>("/api/users/enter");
   const onValid = (validForm: EnterForm) => {
-    // reset();
+    reset();
     console.log(validForm);
     enter(validForm);
   };

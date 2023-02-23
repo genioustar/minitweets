@@ -1,9 +1,20 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 import useSWR from "swr";
 
 export default () => {
-  const { data } = useSWR("/api/tweets");
+  // const { data } = useSWR("/api/tweets");
   // console.log(data);
+  const { data, error } = useSWR("/api/users/me");
+  const router = useRouter();
+  console.log(data);
+  useEffect(() => {
+    if (data && !data.ok) {
+      router.replace("/create-account");
+    }
+  }, [data, router]);
+
   return (
     <div className="w-full mx-auto max-w-xl mt-16">
       <div className="flex flex-col">
