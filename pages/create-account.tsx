@@ -1,4 +1,7 @@
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import useMutation from "../lib/client/useMutation";
 
 export default function CreateAccount() {
   interface EnterForm {
@@ -7,10 +10,23 @@ export default function CreateAccount() {
     password: string;
     confirm: string;
   }
-  const { register, watch, handleSubmit } = useForm<EnterForm>();
-  const onValid = (data: EnterForm) => {
-    console.log(data);
+  interface MutationResults {
+    ok: boolean;
+  }
+  const { register, watch, handleSubmit, reset } = useForm<EnterForm>();
+  const [enter, { data: loginData }] =
+    useMutation<MutationResults>("/api/users/enter");
+  const onValid = (validForm: EnterForm) => {
+    // reset();
+    console.log(validForm);
+    enter(validForm);
   };
+  const router = useRouter();
+  useEffect(() => {
+    if (loginData) {
+      router.push("/");
+    }
+  });
   return (
     <div className="w-full mx-auto max-w-xl mt-16">
       <h1 className="text-center text-lime-500 font-bold text-4xl">
@@ -28,7 +44,7 @@ export default function CreateAccount() {
           id="email"
           className="rounded-md border border-gray-300 bg-gray-50 px-3 text-gray-500 transition-color duration-200"
           placeholder="이메일 입력"
-          {...register("confirm", { required: true })}
+          {...register("email", { required: true })}
           required
         />
         <label htmlFor="name" className="font-medium text-gray-700">
@@ -39,7 +55,7 @@ export default function CreateAccount() {
           id="name"
           className="rounded-md border border-gray-300 bg-gray-50 px-3 text-gray-500 transition-color duration-200"
           placeholder="Nic Name 입력"
-          {...(register("name"), { required: true })}
+          {...register("name", { required: true })}
           required
         />
         <label htmlFor="password" className="font-medium text-gray-700">
@@ -50,7 +66,7 @@ export default function CreateAccount() {
           id="password"
           className="rounded-md border border-gray-300 bg-gray-50 px-3 text-gray-500 transition-color duration-200"
           placeholder="비밀번호 입력"
-          {...register("confirm", { required: true })}
+          {...register("password", { required: true })}
           required
         ></input>
         <label htmlFor="confirm" className="font-medium text-gray-700">
